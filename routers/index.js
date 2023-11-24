@@ -14,11 +14,3 @@ module.exports = {
     ticketsRouter,
     accountsRouter
 };
-
-
-// const eventsRouter = require("./events");
-
-// module.exports = {
-//     eventsRouter,
-// };
-

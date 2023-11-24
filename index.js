@@ -18,12 +18,23 @@ app.get("/", (req, res) => {
 
 
 //#define ROUTER
+// kai
+// ADI
 const { accountsRouter } = require("./routers");
 app.use("/account", accountsRouter);
 
+// khalid
+const { eventsRouter } = require("./routers")
+app.use("/events", eventsRouter);
 
+const { categoriesRouter } = require("./routers")
+app.use("/categories", categoriesRouter)
+
+// error handling
+app.use((err, req, res, next) => {
+    return res.status(err.rc || 500).send(err);
+})
 
 app.listen(PORT, () => {
     console.log("API Running in port ", PORT);
 });
-

@@ -2,6 +2,7 @@ const { categories } = require("../models")
 const { raw } = require("mysql2");
 
 module.exports = {
+    //    kai
     getData: async (req, res, next) => {
         try {
             result = await categories.findAll()
@@ -11,9 +12,11 @@ module.exports = {
             res.status(500).send(error)
         }
     },
+
+    // khalid
     getAll: async (req, res, next) => {
         try {
-            const result = await categories.findAll({ raw: true })
+            const result = await categories.findAll()
 
             if (result.length) {
                 return res.status(200).send({
@@ -21,7 +24,7 @@ module.exports = {
                     result: result
                 })
             } else {
-                return res.status(400).send({
+                return res.status(404).send({
                     success: false,
                     message: "You Don't Have Categories"
                 })

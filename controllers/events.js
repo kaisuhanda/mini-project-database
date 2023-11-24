@@ -1,6 +1,7 @@
 const { tempTrue, tempFalse } = require("../helper/templateRes");
-const { events, sequelize, tickets, cities, images } = require("../models");
-const db = require("../models")
+const { events, categories, sequelize, tickets, cities, images } = require("../models");
+const db = require("../models");
+// const categoriesController = require("./categories");
 module.exports = {
     create: async (req, res, next) => {
         const t = await db.sequelize.transaction();
@@ -146,6 +147,14 @@ module.exports = {
     get: async (req, res, next) => {
         try {
             const result = await events.findAll({
+                include: [
+                    {
+                        model: categories,
+                        attributes: [
+                            "category"
+                        ]
+                    }
+                ],
                 where: {
                     promoter_id: req.params.id
                 },

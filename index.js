@@ -1,48 +1,29 @@
-// index.js
 require("dotenv").config();
 const PORT = process.env.PORT || 2000;
 const express = require("express");
-const cors = require("cors");
-
 const app = express();
+const cors = require("cors");
+const bearerToken = require("express-bearer-token")
+
 
 app.use(cors());
 app.use(express.json());
+app.use(bearerToken());
+// app.use('/public',express.static('uploads'))
+app.use(express.static('uploads'));
 
-app.get('/', (req, res) => {
-    return res.status(200).send(`API RUNNING on port ${PORT}`);
+app.get("/", (req, res) => {
+    return res.status(200).send("API Running");
 });
 
-const { eventsRouter } = require("./routers");
-const { categoriesRouter } = require("./routers");
-const { citiesRouter } = require("./routers");
-const { ticketsRouter } = require("./routers")
 
-app.use("/events", eventsRouter);
-app.use("/categories", categoriesRouter)
-app.use("/cities", citiesRouter)
-app.use("/tickets", ticketsRouter)
+//#define ROUTER
+const { accountsRouter } = require("./routers");
+app.use("/account", accountsRouter);
+
+
 
 app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
+    console.log("API Running in port ", PORT);
 });
 
-
-// require("dotenv").config();
-// const PORT = process.env.PORT || 2000;
-// const express = require("express");
-// const app = express();
-// const cors = require("cors");
-
-// app.use(cors());
-
-// app.get('/', (req, res) => {
-//     return res.status(200).send('API RUNNING ', PORT);
-// });
-
-// const { eventsRouter } = require("./controllers");
-// app.use("/events", eventsRouter);
-
-// app.listen(PORT, () => {
-//     console.log(`Server running : ${PORT}`);
-// });

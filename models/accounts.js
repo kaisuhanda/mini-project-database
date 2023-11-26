@@ -18,14 +18,27 @@ module.exports = (sequelize, DataTypes) => {
     email: DataTypes.STRING,
     password: DataTypes.STRING,
     role: DataTypes.STRING,
-    phone:DataTypes.STRING,
+    phone: DataTypes.STRING,
     img: {
       type: DataTypes.STRING, // sesuaikan dengan tipe data yang sesuai untuk menyimpan path/gambar
       allowNull: true, // bisa null jika user belum mengunggah foto
     },
+    createdAt: {
+      allowNull: false,
+      type: DataTypes.DATE
+    },
+    updatedAt: {
+      allowNull: false,
+      type: DataTypes.DATE
+    },
+    deletedAt: {
+      allowNull: true,
+      type: DataTypes.DATE
+    },
   }, {
     sequelize,
     modelName: 'accounts',
+    paranoid: true,
   });
   return accounts;
 };

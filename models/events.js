@@ -31,7 +31,6 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.STRING,
     description: DataTypes.STRING,
     location: DataTypes.STRING,
-    image: DataTypes.STRING,
     start_date: DataTypes.DATE,
     end_date: DataTypes.DATE,
     createdAt: {
@@ -42,7 +41,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     deletedAt: {
       type: DataTypes.DATE
-    }
+    },
   }, {
     sequelize,
     modelName: 'events',

@@ -11,32 +11,40 @@ module.exports = {
       },
       username: {
         type: Sequelize.STRING,
-        allowNull:false,
+        allowNull: false,
       },
       email: {
         type: Sequelize.STRING,
-        allowNull:false,
+        allowNull: false,
       },
       password: {
         type: Sequelize.STRING,
-        allowNull:false,
+        allowNull: false,
       },
       role: {
         type: Sequelize.STRING,
-        allowNull:false,
-        defaultValue:"user",
+        allowNull: false,
+        defaultValue: "user",
       },
-      phone:{
+      phone: {
         type: Sequelize.STRING,
-        allowNull:false,
+        allowNull: false,
+      },
+      img: {
+        allowNull: true,
+        type: Sequelize.STRING,
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+      },
+      deletedAt: {
+        allowNull: true,
+        type: Sequelize.DATE,
       }
     });
   },

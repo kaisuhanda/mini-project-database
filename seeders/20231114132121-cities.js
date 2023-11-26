@@ -2,7 +2,7 @@
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up (queryInterface, Sequelize) {
+  async up(queryInterface, Sequelize) {
     await queryInterface.bulkInsert("cities", [
       {
         id: 1,
@@ -45,7 +45,7 @@ module.exports = {
         image: "https://media.istockphoto.com/id/1092423872/id/foto/cakrawala-manila-city-dan-manila-bay-filipina.jpg?s=612x612&w=0&k=20&c=V5niITNOPvH641NyyjCq-Wsz1d_90_RVLUgfa9p4shU=",
         createdAt: new Date(),
         updatedAt: new Date(),
-      }, 
+      },
       {
         id: 7,
         city: "Melbourne",
@@ -63,7 +63,7 @@ module.exports = {
     ])
   },
 
-  async down (queryInterface, Sequelize) {
+  async down(queryInterface, Sequelize) {
     /**
      * Add commands to revert seed here.
      *

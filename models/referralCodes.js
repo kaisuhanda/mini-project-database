@@ -13,16 +13,20 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         unique: true,
       },
-      accountId: {
+      account_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
         unique: true,
+      },
+      deletedAt: {
+        type: DataTypes.DATE
       },
     },
     {
       sequelize,
       modelName: 'ReferralCodes',
       tableName: 'referralcodes',// ini untuk nama tabel
+      paranoid: true,
     }
   );
   return ReferralCodes;

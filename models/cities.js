@@ -15,11 +15,30 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   cities.init({
+    id: {
+      allowNull: false,
+      autoIncrement: true,
+      primaryKey: true,
+      type: DataTypes.INTEGER
+    },
     city: DataTypes.STRING,
-    // image: DataTypes.STRING
+    image: DataTypes.STRING,
+    createdAt: {
+      allowNull: false,
+      type: DataTypes.DATE
+    },
+    updatedAt: {
+      allowNull: false,
+      type: DataTypes.DATE
+    },
+    deletedAt: {
+      allowNull: true,
+      type: DataTypes.DATE
+    },
   }, {
     sequelize,
     modelName: 'cities',
+    paranoid: true,
   });
   return cities;
 };

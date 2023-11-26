@@ -13,10 +13,10 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
-      // image: {
-      //   type: Sequelize.STRING,
-      //   allowNull: false
-      // },
+      image: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
@@ -24,7 +24,12 @@ module.exports = {
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE
-      }
+      },
+      deletedAt: {
+        allowNull: true,
+        type: Sequelize.DATE
+      },
+
     });
   },
   async down(queryInterface, Sequelize) {

@@ -104,7 +104,7 @@ module.exports = {
                     'events.name',
                     'events.description',
                     'events.location',
-                    'events.image',
+                    // 'events.image',
                     'events.start_date',
                     'events.end_date',
                     'events.createdAt',
@@ -115,6 +115,8 @@ module.exports = {
                 separate: true,
                 order: sort
             });
+
+            console.log("RESULT BABY", result);
             return res.status(200).send(result);
         } catch (error) {
             console.log(error);
@@ -125,6 +127,7 @@ module.exports = {
     getEvent: async (req, res, next) => {
         try {
             const event = await events.findByPk(req.params.id)
+            console.log("LOG event KAI", event);
             return res.status(200).send(event)
         } catch (error) {
             console.log(error);
@@ -133,7 +136,7 @@ module.exports = {
     },
 
     // khalid
-    create: async (req, res, next) => {
+    createDashboard: async (req, res, next) => {
         const t = await db.sequelize.transaction();
         try {
             console.log("REQ.BODY", req.body);
@@ -146,7 +149,7 @@ module.exports = {
                 description,
                 location,
                 image,
-                categories_id,
+                category_id,
                 ...others
             } = req.body;
             console.log("OTHERS", others);
@@ -158,7 +161,7 @@ module.exports = {
                 end_date &&
                 description.length <= 2000 &&
                 location &&
-                categories_id &&
+                category_id &&
                 others.stock &&
                 others.type
             ) {
@@ -215,7 +218,7 @@ module.exports = {
             return res.status(500).send({ success: false, error })
         }
     },
-    delete: async (req, res, next) => {
+    deleteDashboard: async (req, res, next) => {
         try {
             const result = await events.destroy({
                 where: {
@@ -243,7 +246,7 @@ module.exports = {
             return res.status(500).send(error);
         }
     },
-    update: async (req, res, next) => {
+    updateDashboard: async (req, res, next) => {
         try {
             const result = await events.update({
                 name: req.body.name,
@@ -254,7 +257,7 @@ module.exports = {
                 image: req.body.image,
                 start_sales: req.body.start_sales,
                 end_sales: req.body.end_sales,
-                categories_id: req.body.categories_id
+                category_id: req.body.category_id
             }, {
                 where: {
                     id: req.params.id
@@ -278,7 +281,7 @@ module.exports = {
             return res.status(500).send(error);
         }
     },
-    get: async (req, res, next) => {
+    getDashboard: async (req, res, next) => {
         try {
             const result = await events.findAll({
                 include: [
@@ -294,10 +297,13 @@ module.exports = {
                 },
                 raw: true
             });
-            console.log(result);
+
+            console.log("RESULT IKI:", result);
 
             if (result.length) {
+                console.log("RESULT IKI:", result);
                 return res.status(200).send(result)
+
             } else {
                 return res.status(400).send({
                     success: false,

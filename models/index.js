@@ -30,15 +30,17 @@ fs
     const model = require(path.join(__dirname, file))(sequelize, Sequelize.DataTypes);
     db[model.name] = model;
   });
-  const models = {
-    ReferralCodes: require('./referralCodes')(sequelize, Sequelize),
-  };
 
 Object.keys(db).forEach(modelName => {
   if (db[modelName].associate) {
     db[modelName].associate(db);
   }
 });
+
+// adi
+const models = {
+  ReferralCodes: require('./referralCodes')(sequelize, Sequelize),
+};
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;

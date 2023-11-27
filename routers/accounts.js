@@ -1,0 +1,27 @@
+const router =require("express").Router();
+const { accountsControllers }= require("../controllers");
+const { validateRegis, validateToken } = require("../middleware/validation");
+const jwt = require("jsonwebtoken")
+const upload = require("../helper/multer");
+
+router.get("/", accountsControllers.getData);
+router.post("/register", validateRegis, accountsControllers.register);
+router.post("/login", accountsControllers.login);
+ router.post("/keeplogin", validateToken,accountsControllers.keepLogin);
+router.post("/editPassword", validateToken, accountsControllers.editPassword);
+router.post("/editProfile", validateToken, accountsControllers.editProfile);
+router.post("/editPhotoProfile", upload.single("profilePicture"), validateToken, accountsControllers.editPhotoProfile);
+
+// Tambahkan routing untuk lupa kata sandi
+router.post("/forgotPassword", accountsControllers.forgotPassword);
+// Tambahkan routing untuk reset kata sandi
+router.post("/resetPassword", accountsControllers.resetPassword);
+
+
+router.get('/getPhoto', accountsControllers.getPhoto);
+
+
+
+module.exports = router;
+
+

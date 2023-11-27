@@ -37,6 +37,11 @@ Object.keys(db).forEach(modelName => {
   }
 });
 
+// adi
+const models = {
+  ReferralCodes: require('./referralCodes')(sequelize, Sequelize),
+};
+
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 

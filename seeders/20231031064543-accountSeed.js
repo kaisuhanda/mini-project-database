@@ -40,6 +40,24 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date(),
       },
+      {
+        username: "promoter-01",
+        email: "promoter-01@mail.com",
+        password: "$2b$10$TyRZHZNzLqh8eJDO08gG2upxvzfVo7OvCiLu.DaWrZFD9ajfOgcYa",
+        phone: "12341514",
+        role: "promoter",
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        username: "user-01",
+        email: "user-01@mail.com",
+        password: "$2b$10$TyRZHZNzLqh8eJDO08gG2upxvzfVo7OvCiLu.DaWrZFD9ajfOgcYa",
+        phone: "12341514",
+        role: "user",
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
 
     ])
   },

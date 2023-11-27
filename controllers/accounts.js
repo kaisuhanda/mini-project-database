@@ -209,13 +209,16 @@ module.exports = {
       console.log(req.token);
       // #description token
       const verifyData = jwt.verify(req.token, process.env.SCRT_TKN);
-      console.log(verifyData);
+      console.log("verifyyyyyy DATA", verifyData);
+
       const result = await accounts.findOne({
         where: {
           id: verifyData.id
         },
         raw: true,
       });
+
+      console.log("RESUULLLTTT", result);
 
       const { id, username, email, phone, role, updatedAt } = result;
 
@@ -234,6 +237,7 @@ module.exports = {
         return res.status(200).send({
           success: true,
           result: {
+            id,
             username,
             email,
             phone,
@@ -245,6 +249,7 @@ module.exports = {
         return res.status(200).send({
           success: true,
           result: {
+            id,
             username,
             email,
             phone,

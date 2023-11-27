@@ -2,12 +2,12 @@
 const express = require("express");
 const { eventsController } = require("../controllers");
 const router = express.Router();
-const { reqParams, validateRole } = require("../middleware/condition");
+const { validateRole } = require("../middleware/condition");
 const { uploader } = require("../helper/uploader");
 
 router.get('/', eventsController.getData);
-router.get('/event/:id', eventsController.getEvent);
-router.get("/promoter/:id", eventsController.getDashboard);
+router.get('/:id', eventsController.getEvent);
+router.get("/promoter/:id", validateRole, eventsController.getDashboard);
 
 router.post(
     "/",

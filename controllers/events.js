@@ -139,8 +139,8 @@ module.exports = {
     createDashboard: async (req, res, next) => {
         const t = await db.sequelize.transaction();
         try {
-            console.log("REQ.BODY", req.body);
-            console.log("REQ.FILES", req.files);
+            // console.log("REQ.BODY", req.body);
+            // console.log("REQ.FILES", req.files);
             const {
                 promoter_id,
                 name,
@@ -186,11 +186,6 @@ module.exports = {
                     transaction: t
                 })
 
-                // const result3 = await cities.create({
-                //     city: others.city
-                // }, { transaction: t })
-                // console.log("REQ.FILES", req.files);
-
                 for (let i = 0; i < req.files.length; i++) {
                     // console.log("IIIII", i);
                     console.log("REQ>FILEESS", req.files[i]);
@@ -225,7 +220,6 @@ module.exports = {
                     id: req.params.id
                 },
             });
-            console.log("RSULT", result);
             if (result) {
                 return res.status(200).send({
                     success: true,
@@ -290,18 +284,23 @@ module.exports = {
                         attributes: [
                             "category"
                         ]
+                    },
+                    {
+                        model: tickets,
+                        attributes: [
+                            "type"
+                        ]
                     }
                 ],
                 where: {
-                    promoter_id: req.params.id
+                    promoter_id: req.userData.id
                 },
                 raw: true
             });
 
-            console.log("RESULT IKI:", result);
+            // console.log("REQ DARI TOKEN", req.userData);
 
             if (result.length) {
-                console.log("RESULT IKI:", result);
                 return res.status(200).send(result)
 
             } else {

@@ -4,7 +4,7 @@
 const eventsController = require("./events");
 const categoriesController = require("./categories")
 const citiesController = require("./cities")
-const ticketsController = require(("./tickets"))
+const ticketsController = require("./tickets")
 // adi
 const accountsControllers = require('./accounts');
 

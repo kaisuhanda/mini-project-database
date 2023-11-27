@@ -30,6 +30,12 @@ app.use("/events", eventsRouter);
 const { categoriesRouter } = require("./routers")
 app.use("/categories", categoriesRouter)
 
+const { citiesRouter } = require("./routers")
+app.use("/cities", citiesRouter)
+
+const { ticketsRouter } = require("./routers")
+app.use("/tickets", ticketsRouter)
+
 // error handling
 app.use((err, req, res, next) => {
     return res.status(err.rc || 500).send(err);

@@ -9,5 +9,14 @@ module.exports = {
             console.log(error);
             res.status(500).send(error)
         }
+    },
+    getTicket: async (req, res, next) => {
+        try {
+            result = await tickets.findByPk(req.params.id)
+            return res.status(200).send(result)
+        } catch (error) {
+            console.log(error);
+            res.status(500).send(error)
+        }
     }
 }

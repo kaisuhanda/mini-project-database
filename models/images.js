@@ -15,10 +15,12 @@ module.exports = (sequelize, DataTypes) => {
   }
   images.init({
     image: DataTypes.STRING,
-    event_id: DataTypes.INTEGER
+    event_id: DataTypes.INTEGER,
+    deletedAt: DataTypes.DATE,
   }, {
     sequelize,
     modelName: 'images',
+    paranoid: true,
   });
   return images;
 };

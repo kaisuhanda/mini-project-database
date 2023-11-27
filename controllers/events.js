@@ -104,7 +104,7 @@ module.exports = {
                     'events.name',
                     'events.description',
                     'events.location',
-                    'events.image',
+                    // 'events.image',
                     'events.start_date',
                     'events.end_date',
                     'events.createdAt',
@@ -115,6 +115,8 @@ module.exports = {
                 separate: true,
                 order: sort
             });
+
+            console.log("RESULT BABY", result);
             return res.status(200).send(result);
         } catch (error) {
             console.log(error);
@@ -125,6 +127,7 @@ module.exports = {
     getEvent: async (req, res, next) => {
         try {
             const event = await events.findByPk(req.params.id)
+            console.log("LOG event KAI", event);
             return res.status(200).send(event)
         } catch (error) {
             console.log(error);
@@ -133,11 +136,11 @@ module.exports = {
     },
 
     // khalid
-    create: async (req, res, next) => {
+    createDashboard: async (req, res, next) => {
         const t = await db.sequelize.transaction();
         try {
-            console.log("REQ.BODY", req.body);
-            console.log("REQ.FILES", req.files);
+            // console.log("REQ.BODY", req.body);
+            // console.log("REQ.FILES", req.files);
             const {
                 promoter_id,
                 name,
@@ -146,7 +149,7 @@ module.exports = {
                 description,
                 location,
                 image,
-                categories_id,
+                category_id,
                 ...others
             } = req.body;
             console.log("OTHERS", others);
@@ -158,7 +161,7 @@ module.exports = {
                 end_date &&
                 description.length <= 2000 &&
                 location &&
-                categories_id &&
+                category_id &&
                 others.stock &&
                 others.type
             ) {
@@ -182,11 +185,6 @@ module.exports = {
                 }, {
                     transaction: t
                 })
-
-                // const result3 = await cities.create({
-                //     city: others.city
-                // }, { transaction: t })
-                // console.log("REQ.FILES", req.files);
 
                 for (let i = 0; i < req.files.length; i++) {
                     // console.log("IIIII", i);
@@ -215,14 +213,13 @@ module.exports = {
             return res.status(500).send({ success: false, error })
         }
     },
-    delete: async (req, res, next) => {
+    deleteDashboard: async (req, res, next) => {
         try {
             const result = await events.destroy({
                 where: {
                     id: req.params.id
                 },
             });
-            console.log("RSULT", result);
             if (result) {
                 return res.status(200).send({
                     success: true,
@@ -243,7 +240,7 @@ module.exports = {
             return res.status(500).send(error);
         }
     },
-    update: async (req, res, next) => {
+    updateDashboard: async (req, res, next) => {
         try {
             const result = await events.update({
                 name: req.body.name,
@@ -254,7 +251,7 @@ module.exports = {
                 image: req.body.image,
                 start_sales: req.body.start_sales,
                 end_sales: req.body.end_sales,
-                categories_id: req.body.categories_id
+                category_id: req.body.category_id
             }, {
                 where: {
                     id: req.params.id
@@ -278,7 +275,7 @@ module.exports = {
             return res.status(500).send(error);
         }
     },
-    get: async (req, res, next) => {
+    getDashboard: async (req, res, next) => {
         try {
             const result = await events.findAll({
                 include: [
@@ -287,17 +284,25 @@ module.exports = {
                         attributes: [
                             "category"
                         ]
+                    },
+                    {
+                        model: tickets,
+                        attributes: [
+                            "type"
+                        ]
                     }
                 ],
                 where: {
-                    promoter_id: req.params.id
+                    promoter_id: req.userData.id
                 },
                 raw: true
             });
-            console.log(result);
+
+            // console.log("REQ DARI TOKEN", req.userData);
 
             if (result.length) {
                 return res.status(200).send(result)
+
             } else {
                 return res.status(400).send({
                     success: false,

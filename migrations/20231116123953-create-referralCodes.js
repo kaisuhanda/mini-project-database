@@ -14,7 +14,7 @@ module.exports = {
         allowNull: false,
         unique: true,
       },
-      accountId: {
+      account_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         unique: true,
@@ -32,7 +32,11 @@ module.exports = {
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE
-      }
+      },
+      deletedAt: {
+        allowNull: true,
+        type: Sequelize.DATE
+      },
     });
   },
   async down(queryInterface, Sequelize) {

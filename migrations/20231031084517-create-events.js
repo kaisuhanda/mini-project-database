@@ -13,11 +13,23 @@ module.exports = {
         allowNull: true,
         type: Sequelize.INTEGER
       },
+      category_id: {
+        allowNull: false,
+        type: Sequelize.INTEGER
+      },
       city_id: {
         allowNull: true,
         type: Sequelize.INTEGER
       },
       name: {
+        allowNull: false,
+        type: Sequelize.STRING
+      },
+      description: {
+        allowNull: false,
+        type: Sequelize.STRING
+      },
+      location: {
         allowNull: false,
         type: Sequelize.STRING
       },
@@ -28,18 +40,6 @@ module.exports = {
       end_date: {
         allowNull: false,
         type: Sequelize.DATE
-      },
-      description: {
-        allowNull: false,
-        type: Sequelize.STRING
-      },
-      location: {
-        allowNull: false,
-        type: Sequelize.STRING
-      },
-      categories_id: {
-        allowNull: false,
-        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,

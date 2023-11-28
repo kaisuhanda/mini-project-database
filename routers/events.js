@@ -14,7 +14,9 @@ router.post(
     uploader("/").array("images"),
     eventsController.createDashboard);
 router.delete("/:id", eventsController.deleteDashboard);
-router.patch("/:id", eventsController.updateDashboard);
+router.patch("/:id",
+    uploader("/").array("images"),
+    eventsController.updateDashboard);
 
 
 module.exports = router;

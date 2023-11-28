@@ -127,7 +127,6 @@ module.exports = {
     getEvent: async (req, res, next) => {
         try {
             const event = await events.findByPk(req.params.id)
-            console.log("LOG event KAI", event);
             return res.status(200).send(event)
         } catch (error) {
             console.log(error);
@@ -148,12 +147,10 @@ module.exports = {
                 end_date,
                 description,
                 location,
-                image,
                 category_id,
                 ...others
             } = req.body;
             console.log("OTHERS", others);
-            console.log("REQ>BODY.cities", req.body.city);
             if (
                 promoter_id &&
                 name.length <= 50 &&
@@ -163,7 +160,8 @@ module.exports = {
                 location &&
                 category_id &&
                 others.stock &&
-                others.type
+                others.type &&
+                others.city_id
             ) {
                 const result = await events.create(
                     req.body,
@@ -257,8 +255,8 @@ module.exports = {
                     id: req.params.id
                 }
             });
-            console.log("RESULT", result[0]);
-            if (result[0]) {
+            console.log("RESULT,", result);
+            if (result[0] === 1) {
                 return res.status(200).send({
                     success: true,
                     message: "Event has been updated",
@@ -285,12 +283,12 @@ module.exports = {
                             "category"
                         ]
                     },
-                    {
-                        model: tickets,
-                        attributes: [
-                            "type"
-                        ]
-                    }
+                    // {
+                    //     model: tickets,
+                    //     attributes: [
+                    //         "type"
+                    //     ]
+                    // }
                 ],
                 where: {
                     promoter_id: req.userData.id
